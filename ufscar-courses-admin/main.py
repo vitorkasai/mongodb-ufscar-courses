@@ -8,8 +8,9 @@ def exibir_menu():
     print("\n--- Menu ---")
     print("1. Buscar cursos por campus")
     print("2. Buscar cursos por tipo de curso")
-    print("3. Sair")
-    escolha = input("Escolha uma opção (1/2/3): ")
+    print("3. Buscar cursos por nome")
+    print("4. Sair")
+    escolha = input("Escolha uma opção (1/2/3/4): ")
     return escolha
 
 
@@ -75,6 +76,23 @@ def buscar_cursos_por_tipo():
         print("Entrada inválida. Por favor, escolha um número válido.")
 
 
+def buscar_cursos_por_nome():
+    nome_curso = input("Digite o nome do curso: ")
+    cursos = find_cursos_by_nome(nome_curso)
+
+    if not cursos:
+        print(f"Nenhum curso encontrado com o nome: {nome_curso}")
+        return
+
+    print(f"\nCursos encontrados com o nome '{nome_curso}':")
+    for curso in cursos:
+        print(f"Nome do Curso: {curso['nome_curso']}")
+        print(f"Campus: {curso['campus_curso']}")
+        print(f"Tipo de Curso: {curso['tipo_curso']}")
+        print(f"Vagas: {curso['vagas_curso']}")
+        print("-" * 30)
+
+
 def main():
     while True:
         escolha = exibir_menu()
@@ -84,6 +102,8 @@ def main():
         elif escolha == "2":
             buscar_cursos_por_tipo()
         elif escolha == "3":
+            buscar_cursos_por_nome()
+        elif escolha == "4":
             print("Finalizando programa...")
             break
         else:

@@ -31,6 +31,14 @@ def find_cursos_by_tipo(tipo_curso):
     return cursos_encontrados
 
 
+def find_cursos_by_nome(nome_curso):
+    collection = get_db_connection()
+    cursos_encontrados = collection.find(
+        {"nome_curso": {"$regex": nome_curso, "$options": "i"}}, {"_id": 0}
+    )
+    return cursos_encontrados
+
+
 def find_all_campus():
     collection = get_db_connection()
     return collection.distinct("campus_curso")
