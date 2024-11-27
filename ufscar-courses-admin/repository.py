@@ -47,3 +47,8 @@ def find_all_campus():
 def find_all_tipo_curso():
     collection = get_db_connection()
     return collection.distinct("tipo_curso")
+
+
+def inserir_novo_curso(curso):
+    collection = get_db_connection()
+    collection.insert_one(curso)
