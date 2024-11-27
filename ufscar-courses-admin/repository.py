@@ -16,5 +16,10 @@ def get_db_connection():
 
 def find_all_cursos():
     collection = get_db_connection()
-    return collection.find()
+    return collection.find({"_id": 0})
 
+
+def find_cursos_by_campus(campus_curso):
+    collection = get_db_connection()
+    cursos_encontrados = collection.find({"campus_curso": campus_curso}, {"_id": 0})
+    return cursos_encontrados
