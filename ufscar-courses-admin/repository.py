@@ -25,6 +25,17 @@ def find_cursos_by_campus(campus_curso):
     return cursos_encontrados
 
 
+def find_cursos_by_tipo(tipo_curso):
+    collection = get_db_connection()
+    cursos_encontrados = collection.find({"tipo_curso": tipo_curso}, {"_id": 0})
+    return cursos_encontrados
+
+
 def find_all_campus():
     collection = get_db_connection()
     return collection.distinct("campus_curso")
+
+
+def find_all_tipo_curso():
+    collection = get_db_connection()
+    return collection.distinct("tipo_curso")
