@@ -23,3 +23,8 @@ def find_cursos_by_campus(campus_curso):
     collection = get_db_connection()
     cursos_encontrados = collection.find({"campus_curso": campus_curso}, {"_id": 0})
     return cursos_encontrados
+
+
+def find_all_campus():
+    collection = get_db_connection()
+    return collection.distinct("campus_curso")
