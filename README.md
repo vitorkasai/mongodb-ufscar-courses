@@ -33,6 +33,7 @@ Este sistema permite o gerenciamento de cursos universitários, incluindo funcio
 ├── main.py             # Arquivo principal que executa a aplicação
 ├── .env                # Arquivo de configuração de variáveis de ambiente
 └── README.md           # Este arquivo
+```
 
 ## Como Rodar o Projeto
 
@@ -48,12 +49,14 @@ Este sistema permite o gerenciamento de cursos universitários, incluindo funcio
    ```bash
    git clone git@github.com:vitorkasai/mongodb-ufscar-courses.git
    cd mongodb-ufscar-courses
+   ```
 
 2. Crie um ambiente virtual (opcional, mas recomendado):
 
     ```bash
     python -m venv venv
     source venv/bin/activate  # No Windows, use `venv\Scripts\activate`
+    ```
 
 3. Instale as dependências:
 
@@ -66,11 +69,13 @@ Este sistema permite o gerenciamento de cursos universitários, incluindo funcio
     MONGO_URL=mongodb://<usuario>:<senha>@<host>:<porta>/<nome_do_banco>
     NOME_DB=<nome_do_banco>
     NOME_COLLECTION=<nome_da_colecao>
+    ```
 
 5. Execute o aplicativo:
 
     ```bash
     python main.py
+    ```
 
 ## Como Usar
 
