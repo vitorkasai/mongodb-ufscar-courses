@@ -1,3 +1,10 @@
+# Arquivos de cache e configurações de cada usuário
 .DS_Store
-ufscar-courses-admin/.idea/
-ufscar-courses-admin/__pycache__/
+.idea/
+__pycache__
+
+# Variaveis de ambiente
+*.env
+
+# Ambiente virtual de cada usuário
+**venv**
