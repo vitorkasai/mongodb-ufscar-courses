@@ -1,3 +1,13 @@
+# Definindo as cores
+cores = {
+    "azul": "\033[34m",
+    "amarelo": "\033[33m",
+    "laranja": "\033[38;5;214m",  # Laranja aproximado
+    "vermelho": "\033[31m",
+    "verde": "\033[32m",
+    "reset": "\033[0m",  # Resetar para a cor padrão
+}
+
 tables = {
     "curso": "curso",
     "semestre": "semestre",

@@ -1,19 +1,19 @@
 from repositories.curso import *
-from . import visualizar_detalhes, eh_indice_valido, admin_menu_opcoes, tables, exibir_lista_objeto, obter_id_de_lista, exibir_menu_atualizar_deletar
+from . import visualizar_detalhes, eh_indice_valido, admin_menu_opcoes, tables, exibir_lista_objeto, obter_id_de_lista, exibir_menu_atualizar_deletar, cores
 from repositories.semestre import find_all_semestres
 from repositories.professor import find_professor_by_id, find_all_professores
 
 
 def exibir_menu_curso():
     """Funções CRUD para cursos"""
-    print("\nMenu Curso")
+    print(f"{cores['azul']}\nMenu Curso{cores['reset']}")
     crud_opcoes = admin_menu_opcoes[tables["curso"]]["crud_opcoes"]
     for indice, opcao in enumerate(crud_opcoes, 1):
         print(f"{indice}. {opcao}")
 
     escolha = input("Escolha uma opção (deixe vazio para retornar): ").strip().lower()
     while not (eh_indice_valido(escolha, len(crud_opcoes)) or escolha == ""):
-        print("Opção inválida! Tente novamente.")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
         for indice, opcao in enumerate(crud_opcoes, 1):
             print(f"{indice}. {opcao}")
         escolha = input("Escolha uma opção (deixe vazio para retornar): ").strip().lower()
@@ -51,7 +51,7 @@ def cadastrar_novo_curso():
     """Função para cadastrar um novo curso."""
     nome_curso = input("Digite o nome do curso: ").strip()
     while not nome_curso:
-        print("Nome do curso é obrigatório.")
+        print(f"{cores['vermelho']}Nome do curso é obrigatório.{cores['reset']}")
         nome_curso = input("Digite o nome do curso: ").strip()
 
     campus_list = find_all_campus()
@@ -62,7 +62,7 @@ def cadastrar_novo_curso():
 
     campus_curso = input("Escolha o número do campus: ").strip()
     while not eh_indice_valido(campus_curso, len(campus_list)):
-        print("Opção inválida. Tente novamente.")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
         campus_curso = input("Escolha o número do campus: ").strip()
 
 
@@ -73,13 +73,13 @@ def cadastrar_novo_curso():
     
     tipo_curso = input("Escolha o número do tipo de curso: ").strip()
     while not eh_indice_valido(tipo_curso, len(tipo_list)):
-        print("Opção inválida. Tente novamente.")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
         tipo_curso = input("Escolha o número do tipo de curso: ").strip()
 
 
     vagas_curso = input("Digite o número de vagas: ").strip()
     while not (vagas_curso.isdigit() and int(vagas_curso) >= 0):
-        print("Número de vagas inválido. Digite um número inteiro maior ou igual a 0.")
+        print(f"{cores['vermelho']}Número de vagas inválido. Digite um número inteiro maior ou igual a 0.{cores['reset']}")
         vagas_curso = input("Digite o número de vagas: ").strip()
 
     curso = {
@@ -91,10 +91,10 @@ def cadastrar_novo_curso():
 
     resultado = inserir_novo_curso(curso)
     if resultado.acknowledged:
-        print(f"Curso '{nome_curso}' cadastrado com sucesso!")
+        print(f"{cores['verde']}Curso '{nome_curso}' cadastrado com sucesso!{cores['reset']}")
         return curso
     else:
-        print("Erro ao cadastrar curso.")
+        print(f"{cores['vermelho']}Erro ao cadastrar curso.{cores['reset']}")
         return {}
 
 def buscar_cursos_por_professor():
@@ -102,11 +102,11 @@ def buscar_cursos_por_professor():
     professor_id = input("Digite o ID do professor para buscar cursos: ").strip()
     professor = find_professor_by_id(professor_id)
     if not professor:
-        print("Nenhum professor encontrado.")
+        print(f"{cores['vermelho']}Nenhum professor encontrado.{cores['reset']}")
         return []
     cursos = find_cursos_by_professor(professor_id)
     if not cursos:
-        print("Nenhum curso encontrado.")
+        print(f"{cores['vermelho']}Nenhum curso encontrado.{cores['reset']}")
         return []
     
     cursos_lista = list(cursos)
@@ -121,17 +121,17 @@ def buscar_cursos_por_semestre():
     """Busca cursos por semestre."""
     semestres = find_all_semestres()
     if not semestres:
-        print("Nenhum semestre encontrado.")
+        print(f"{cores['vermelho']}Nenhum semestre encontrado.{cores['reset']}")
         return []
     
     semestres_list = list(semestres)
     print("\nEscolha um semestre:")
     for i, semestre in enumerate(semestres_list, 1):
-        print(f"{i}. {semestre}")
+        print(f"{i}. {semestre['ano']}/{semestre['numero_semestre']}")
 
     escolha_semestre = input("Escolha o número do semestre: ").strip()
     while not eh_indice_valido(escolha_semestre, len(semestres_list)):
-        print("Opção inválida. Tente novamente.")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
         escolha_semestre = input("Escolha o número do semestre: ").strip()
     
     semestre = semestres_list[int(escolha_semestre) - 1]
@@ -143,7 +143,7 @@ def buscar_cursos_por_semestre():
         exibir_lista_objeto(cursos_lista)
         return cursos_lista
     else:
-        print(f"Nenhum curso encontrado para o semestre '{semestre}'.")
+        print(f"{cores['vermelho']}Nenhum curso encontrado para o semestre '{semestre}'.{cores['reset']}")
         return []
 
 
@@ -151,7 +151,7 @@ def buscar_cursos_por_campus():
     """Busca cursos por campus."""
     todos_campus = find_all_campus()
     if not todos_campus:
-        print("Nenhum campus encontrado.")
+        print(f"{cores['vermelho']}Nenhum campus encontrado.{cores['reset']}")
         return []
 
     campus_list = list(todos_campus)
@@ -162,7 +162,7 @@ def buscar_cursos_por_campus():
 
     escolha_campus = input("Escolha o número do campus: ").strip()
     while not eh_indice_valido(escolha_campus, len(campus_list)):
-        print("Opção inválida. Tente novamente.")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
         escolha_campus = input("Escolha o número do campus: ").strip()
 
     campus_index = int(escolha_campus) - 1
@@ -176,14 +176,14 @@ def buscar_cursos_por_campus():
         exibir_lista_objeto(cursos_lista)
         return cursos_lista
     else:
-        print(f"Nenhum curso encontrado para o campus '{campus_name}'.")
+        print(f"{cores['vermelho']}Nenhum curso encontrado para o campus '{campus_name}'.{cores['reset']}")
         return []
 
 def buscar_cursos_por_tipo():
     """Busca cursos por tipo."""
     tipo_list = find_all_tipo_curso()
     if not tipo_list:
-        print("Nenhum tipo de curso encontrado.")
+        print(f"{cores['vermelho']}Nenhum tipo de curso encontrado.{cores['reset']}")
         return []
 
     print("\nEscolha um tipo de curso:")
@@ -192,7 +192,7 @@ def buscar_cursos_por_tipo():
 
     escolha_tipo = input("Escolha o número do tipo de curso: ").strip()
     while not eh_indice_valido(escolha_tipo, len(tipo_list)):
-        print("Opção inválida. Tente novamente.")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
         escolha_tipo = input("Escolha o número do tipo de curso: ").strip()
 
     tipo_index = int(escolha_tipo) - 1
@@ -206,14 +206,14 @@ def buscar_cursos_por_tipo():
         exibir_lista_objeto(cursos_lista)
         return cursos_lista
     else:
-        print(f"Nenhum curso encontrado para o tipo '{tipo_name}'.")
+        print(f"{cores['vermelho']}Nenhum curso encontrado para o tipo '{tipo_name}'.{cores['reset']}")
         return []
 
 def buscar_cursos_por_nome():
     """Busca cursos por nome."""
     nome_curso = input("Digite o nome do curso: ").strip()
     while not nome_curso:
-        print("Nome do curso é obrigatório.")
+        print(f"{cores['vermelho']}Nome do curso é obrigatório.{cores['reset']}")
         nome_curso = input("Digite o nome do curso: ").strip()
 
     cursos = find_cursos_by_nome(nome_curso)
@@ -224,7 +224,7 @@ def buscar_cursos_por_nome():
         exibir_lista_objeto(cursos_lista)
         return cursos_lista
     else:
-        print(f"Nenhum curso encontrado com o nome '{nome_curso}'.")
+        print(f"{cores['vermelho']}Nenhum curso encontrado com o nome '{nome_curso}'.{cores['reset']}")
         return []
 
 def atualizar_curso(id_curso):
@@ -247,7 +247,7 @@ def atualizar_curso(id_curso):
 
     campus_novo = input("Escolha o número do campus (deixe em branco para manter o atual): ").strip()
     while not (eh_indice_valido(campus_novo, len(campus_list)) or campus_novo == ""):
-        print("Opção inválida. Tente novamente.")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
         campus_novo = input("Escolha o número do campus (deixe em branco para manter o atual): ").strip()
     if campus_novo:
         novos_dados['campus_curso'] = campus_list[int(campus_novo) - 1]
@@ -260,7 +260,7 @@ def atualizar_curso(id_curso):
 
     tipo_novo = input("Escolha o número do tipo de curso (deixe em branco para manter o atual): ").strip()
     while not (eh_indice_valido(tipo_novo, len(tipo_list)) or tipo_novo == ""):
-        print("Opção inválida. Tente novamente.")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
         tipo_novo = input("Escolha o número do tipo de curso (deixe em branco para manter o atual): ").strip()
     if tipo_novo:
         novos_dados['tipo_curso'] = tipo_list[int(tipo_novo) - 1]
@@ -268,7 +268,7 @@ def atualizar_curso(id_curso):
     # VAGAS
     vagas_novo = input("Novo número de vagas (deixe em branco para manter o atual): ").strip()
     while not ((vagas_novo.isdigit() and int(vagas_novo) >= 0) or vagas_novo == ""):
-        print("Número de vagas inválido. Digite um número inteiro maior ou igual a 0.")
+        print(f"{cores['vermelho']}Número de vagas inválido. Digite um número inteiro maior ou igual a 0.{cores['reset']}")
         vagas_novo = input("Novo número de vagas (deixe em branco para manter o atual): ").strip()
     if vagas_novo:
         novos_dados['vagas_curso'] = int(vagas_novo)
@@ -280,11 +280,11 @@ def atualizar_curso(id_curso):
         if len(semestres_list) > 0:
             print("\nEscolha um semestre:")
             for i, semestre in enumerate(semestres_list, 1):
-                print(f"{i}. {semestre}")
+                print(f"{i}. {semestre['ano']}/{semestre['numero_semestre']}")
             
             semestre_novo = input("Escolha o número do semestre (deixe em branco para manter o atual): ").strip()
             while not (eh_indice_valido(semestre_novo, len(semestres_list)) or semestre_novo == ""):
-                print("Opção inválida. Tente novamente.")
+                print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
                 semestre_novo = input("Escolha o número do semestre (deixe em branco para manter o atual): ").strip()
             if semestre_novo:
                 novos_dados['semestre'] = semestres_list[int(semestre_novo) - 1]["_id"]
@@ -300,7 +300,7 @@ def atualizar_curso(id_curso):
                 
             selecionados = input("Digite os números dos professores separados por vírgula (deixe em branco para manter os atuais): ").strip().split(",")
             while not (all(eh_indice_valido(selecionado, len(professores)) for selecionado in selecionados) or selecionados == ['']):
-                print("Ao menos um dos números é inválido. Tente novamente.")
+                print(f"{cores['vermelho']}Ao menos um dos números é inválido. Tente novamente.{cores['reset']}")
                 selecionados = input("Digite os números dos professores separados por vírgula (deixe em branco para manter os atuais): ").strip().split(",")
             
             if selecionados != ['']:
@@ -311,15 +311,15 @@ def atualizar_curso(id_curso):
         atualizar_curso_no_banco(curso_encontrado, novos_dados)
         return novos_dados
     else:
-        print("Nenhuma alteração foi feita.")
+        print(f"{cores['verde']}Nenhuma alteração foi feita.{cores['reset']}")
         return {}
 
 def deletar_curso(id_curso):
     """Função para deletar um curso."""
     curso_encontrado = find_curso_by_id(id_curso)
-    print(f"Você está prestes a excluir o curso '{curso_encontrado['nome_curso']}' do campus '{curso_encontrado['campus_curso']}'.")
+    print(f"{cores['vermelho']}Você está prestes a excluir o curso '{curso_encontrado['nome_curso']}' do campus '{curso_encontrado['campus_curso']}'.{cores['reset']}")
     confirmar = input("Tem certeza? [S/N]: ").strip().lower()
     if len(confirmar) > 0 and confirmar[0] == 's':
         remover_curso_do_banco(curso_encontrado)
     else:
-        print("Deleção cancelada.")
+        print(f"{cores['verde']}Deleção cancelada.{cores['reset']}")

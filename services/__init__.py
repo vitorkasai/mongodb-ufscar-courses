@@ -1,5 +1,5 @@
 from helpers import eh_indice_valido
-from constants import admin_menu_opcoes, tables
+from constants import admin_menu_opcoes, tables, cores
 from bson import ObjectId
 
 # Função genérica para exibir listas
@@ -30,7 +30,7 @@ def obter_id_de_lista(dados: list[any]):
     ids = [dado['_id'] for dado in dados]
 
     while id_selecionado != "" and str(id_selecionado_obj) not in [str(id) for id in ids]:
-        print(f"'_id' inválido! Tente novamente.")
+        print(f"{cores['vermelho']}'_id' inválido! Tente novamente.{cores['reset']}")
         id_selecionado = input(f"\nEscolha um '_id' para manipular (deixe vazio para voltar): ").strip()
         try:
             id_selecionado_obj = ObjectId(id_selecionado)
@@ -44,16 +44,16 @@ def obter_id_de_lista(dados: list[any]):
 
 def exibir_menu_atualizar_deletar() -> int:
     """Função para retornar a opção de atualizar ou deletar um certo dado. Ou -1 se deixado vazio."""
-    print(f"\nMenu de atualização e remoção")
-    print("1. Atualizar")
-    print("2. Deletar")
+    print(f"{cores['azul']}\nMenu de atualização e remoção{cores['reset']}")
+    print(f"{cores['laranja']}1. Atualizar{cores['reset']}")
+    print(f"{cores['vermelho']}2. Deletar{cores['reset']}")
 
     escolha = input("Escolha uma opção (deixe vazio para voltar): ").strip().lower()
     while not (eh_indice_valido(escolha, 2) or escolha == ""):
-        print("Opção inválida! Tente novamente.")
-        print(f"\nMenu de atualização e remoção")
-        print("1. Atualizar")
-        print("2. Deletar")
+        print(f"{cores['vermelho']}Opção inválida! Tente novamente.{cores['reset']}")
+        print(f"{cores['azul']}\nMenu de atualização e remoção{cores['reset']}")
+        print(f"{cores['laranja']}1. Atualizar{cores['reset']}")
+        print(f"{cores['vermelho']}2. Deletar{cores['reset']}")
         escolha = input("Escolha uma opção (deixe vazio para voltar): ").strip().lower()
 
     if escolha == "":

@@ -1,4 +1,5 @@
 from . import get_db_connection, getenv
+from constants import cores
 
 # Funções para trabalhar com professores
 def inserir_novo_professor(professor):
@@ -31,14 +32,14 @@ def atualizar_professor_no_banco(professor_id, novos_dados):
         {"$set": novos_dados}
     )
     if resultado.matched_count:
-        print("Professor atualizado com sucesso.")
+        print(f"{cores['verde']}Professor atualizado com sucesso.{cores['reset']}")
     else:
-        print("Professor não encontrado.")
+        print(f"{cores['vermelho']}Professor não encontrado.{cores['reset']}")
 
 def remover_professor_do_banco(professor_id):
     collection = get_db_connection(getenv("NOME_PROFESSOR_COLLECTION"))
     resultado = collection.delete_one({"_id": professor_id})
     if resultado.deleted_count:
-        print("Professor removido com sucesso.")
+        print(f"{cores['verde']}Professor removido com sucesso.{cores['reset']}")
     else:
-        print("Professor não encontrado.")
+        print(f"{cores['vermelho']}Professor não encontrado.{cores['reset']}")
