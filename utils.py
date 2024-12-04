@@ -1,6 +1,11 @@
-# Importações
-from services import *
+# utils.py
 
+from services import *
+from constants import admin_menu_opcoes, tables
+
+from services.curso import exibir_menu_curso
+from services.semestre import exibir_menu_semestre
+from services.professor import exibir_menu_professor
 
 # Funções
 def encerrar_programa() -> None:
@@ -9,30 +14,20 @@ def encerrar_programa() -> None:
 
 def exibir_menu() -> None:
     print("\n--- Menu ---")
-    [print(f"{indice}. {admin_menu_opcao['opcao']}") for indice, admin_menu_opcao in enumerate(admin_menu_opcoes, 1)]
+    indice = 1
+    for key, value in admin_menu_opcoes.items():
+        print(f"{indice}. {value['opcao']}")
+        indice += 1
+    print("0. Encerrar programa")
 
 
-# Constantes
-admin_menu_opcoes = [
-    {
-        "opcao": "Buscar cursos por campus",
-        "handler": buscar_cursos_por_campus
-    },
-    {
-        "opcao": "Buscar cursos por tipo de curso",
-        "handler": buscar_cursos_por_tipo
-    },
-    {
-        "opcao": "Buscar cursos por nome",
-        "handler": buscar_cursos_por_nome
-    },
-    {
-        "opcao": "Cadastrar novo curso",
-        "handler": cadastrar_novo_curso
-    },
-    {
-        "opcao": "Sair",
-        "handler": encerrar_programa
-    }
-]
-
+def executar_crud(table):
+    """Função para executar o CRUD baseado na tabela."""
+    if table == tables["curso"]:
+        exibir_menu_curso()
+    elif table == tables["semestre"]:
+        exibir_menu_semestre()
+    elif table == tables["professor"]:
+        exibir_menu_professor()
+    else:
+        print("Tabela não reconhecida.")
