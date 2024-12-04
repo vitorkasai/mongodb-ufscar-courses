@@ -8,3 +8,10 @@ __pycache__
 
 # Ambiente virtual de cada usuário
 **venv**
+
+# ignora os dados em /exported_data/csv e /exported_data/json exceto os gitkeep
+/exported_data/csv/*
+!/exported_data/csv/.gitkeep
+
+/exported_data/json/*
+!/exported_data/json/.gitkeep
