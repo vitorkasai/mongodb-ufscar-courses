@@ -1,6 +1,8 @@
-from repositories.semestre import *
-from . import exibir_lista_objeto, admin_menu_opcoes, tables, eh_indice_valido, obter_id_de_lista, exibir_menu_atualizar_deletar, visualizar_detalhes, cores
 from repositories.curso import find_all_cursos
+from repositories.semestre import *
+from . import exibir_lista_objeto, admin_menu_opcoes, tables, eh_indice_valido, obter_id_de_lista, \
+    exibir_menu_atualizar_deletar, visualizar_detalhes, cores
+
 
 def exibir_menu_semestre():
     """Funções CRUD para semestres"""

@@ -1,6 +1,8 @@
-from repositories.professor import *
-from . import exibir_lista_objeto, admin_menu_opcoes, tables, eh_indice_valido, obter_id_de_lista, exibir_menu_atualizar_deletar, visualizar_detalhes, cores
 from repositories.curso import find_curso_by_id, find_all_cursos
+from repositories.professor import *
+from . import exibir_lista_objeto, admin_menu_opcoes, tables, eh_indice_valido, obter_id_de_lista, \
+    exibir_menu_atualizar_deletar, visualizar_detalhes, cores
+
 
 def exibir_menu_professor():
     """Funções CRUD para professores"""

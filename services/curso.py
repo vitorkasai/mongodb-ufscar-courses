@@ -1,7 +1,8 @@
 from repositories.curso import *
-from . import visualizar_detalhes, eh_indice_valido, admin_menu_opcoes, tables, exibir_lista_objeto, obter_id_de_lista, exibir_menu_atualizar_deletar, cores
-from repositories.semestre import find_all_semestres
 from repositories.professor import find_professor_by_id, find_all_professores
+from repositories.semestre import find_all_semestres
+from . import visualizar_detalhes, eh_indice_valido, admin_menu_opcoes, tables, exibir_lista_objeto, obter_id_de_lista, \
+    exibir_menu_atualizar_deletar, cores
 
 
 def exibir_menu_curso():
