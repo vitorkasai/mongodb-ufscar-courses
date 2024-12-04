@@ -2,17 +2,9 @@
 
 ## Descrição
 
-Este sistema permite o gerenciamento de cursos universitários, incluindo funcionalidades para cadastro, atualização, remoção e busca de cursos por diferentes critérios, como campus, tipo e nome do curso. A aplicação se conecta a um banco de dados MongoDB para armazenar e manipular as informações dos cursos.
+Este sistema permite o gerenciamento de cursos universitários, incluindo funcionalidades para cadastro, atualização, remoção e busca de cursos por diferentes critérios, como campus, tipo e nome do curso. A aplicação se conecta a um banco de dados MongoDB para armazenar e manipular as informações dos cursos. Há ainda informações adicionais que podem ser inseridas tais como o semestre do curso e o(s) professore(s) responsável(is).
+Existe ainda a possibilidade de exportar os dados de uma determinada coleção como CSV ou JSON.
 
-## Funcionalidades
-
-- **Cadastro de Novo Curso**: Permite cadastrar um novo curso, associando-o a um campus e tipo de curso, além de definir o número de vagas.
-- **Busca de Cursos**:
-  - Buscar por campus
-  - Buscar por tipo de curso
-  - Buscar por nome de curso
-- **Atualização de Curso**: Permite atualizar o nome, campus, tipo e número de vagas de um curso existente.
-- **Remoção de Curso**: Permite remover um curso do sistema.
 
 ## Tecnologias Utilizadas
 
@@ -22,18 +14,6 @@ Este sistema permite o gerenciamento de cursos universitários, incluindo funcio
   - `pymongo` para interação com o MongoDB
   - `dotenv` para carregamento de variáveis de ambiente
 
-## Estrutura de Diretórios
-
-```bash
-.
-├── repository.py       # Funções para interagir com o banco de dados
-├── services.py         # Lógica de negócios e manipulação dos cursos
-├── utils.py            # Funções utilitárias
-├── helpers.py          # Funções auxiliares
-├── main.py             # Arquivo principal que executa a aplicação
-├── .env                # Arquivo de configuração de variáveis de ambiente
-└── README.md           # Este arquivo
-```
 
 ## Como Rodar o Projeto
 
@@ -68,7 +48,9 @@ Este sistema permite o gerenciamento de cursos universitários, incluindo funcio
     ```bash
     MONGO_URL=mongodb://<usuario>:<senha>@<host>:<porta>/<nome_do_banco>
     NOME_DB=<nome_do_banco>
-    NOME_COLLECTION=<nome_da_colecao>
+    NOME_CURSO_COLLECTION=<nome_da_colecao>
+    NOME_PROFESSOR_COLLECTION=<nome_da_colecao>
+    NOME_SEMESTRE_COLLECTION=<nome_da_colecao>
     ```
 
 5. Execute o aplicativo:
@@ -79,13 +61,5 @@ Este sistema permite o gerenciamento de cursos universitários, incluindo funcio
 
 ## Como Usar
 
-Após iniciar o aplicativo, você verá um menu interativo no terminal com as seguintes opções:
-
-1. **Cadastrar Novo Curso**: Para cadastrar um novo curso.
-2. **Buscar Cursos por Campus**: Para buscar cursos filtrados por campus.
-3. **Buscar Cursos por Tipo**: Para buscar cursos filtrados por tipo.
-4. **Buscar Cursos por Nome**: Para buscar cursos filtrados por nome.
-5. **Sair**: Para encerrar a aplicação.
-
-O sistema exibirá uma lista de cursos e permitirá que você escolha qual ação deseja executar (atualizar, remover ou voltar).
+Após iniciar o aplicativo, você verá um menu interativo no terminal com as opções disponíveis.
 
