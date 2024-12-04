@@ -1,25 +1,22 @@
-from bson import ObjectId
-
-from constants import cores
 from helpers import eh_indice_valido
-
+from constants import admin_menu_opcoes, tables, cores
+from bson import ObjectId
 
 # Função genérica para exibir listas
 def exibir_lista(dados):
     print("-" * 30)
     for i, item in enumerate(dados, 1):
-        print(f"{i}. {item}")
-
+        print(f"{i}. {item}") 
 
 def exibir_lista_objeto(dados):
     for item in dados:
         visualizar_detalhes(item)
 
-
 def visualizar_detalhes(dados):
     print("-" * 30)
     for chave, valor in dados.items():
         print(f"{chave}: {valor}")
+
 
 
 def obter_id_de_lista(dados: list[any]):
@@ -39,7 +36,7 @@ def obter_id_de_lista(dados: list[any]):
             id_selecionado_obj = ObjectId(id_selecionado)
         except Exception:
             id_selecionado_obj = None
-
+       
     if id_selecionado == "":
         return {'sucesso': False, '_id': None}
     return {'sucesso': True, '_id': id_selecionado_obj}
