@@ -120,7 +120,7 @@ def buscar_professor_por_nome():
         return professor
     else:
         print(f"{cores['vermelho']}Professor não encontrado.{cores['reset']}")
-        return {}
+        return {'_id': None}
 
 def atualizar_professor(id_professor):
     """Atualiza os dados do professor."""

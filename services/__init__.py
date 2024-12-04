@@ -27,6 +27,9 @@ def obter_id_de_lista(dados: list[any]):
     except Exception:
         id_selecionado_obj = None
 
+    if (dados[0] and dados[0]['_id'] == None):
+        return {'sucesso': False, '_id': None}
+
     ids = [dado['_id'] for dado in dados]
 
     while id_selecionado != "" and str(id_selecionado_obj) not in [str(id) for id in ids]:
