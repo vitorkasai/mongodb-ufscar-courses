@@ -296,7 +296,7 @@ def atualizar_curso(id_curso):
         if len(professores) > 0:
             print("\nEscolha os professores:")
             for i, professor in enumerate(professores, 1):
-                print(f"{i}. {professor['nome']}")
+                print(f"{i}. {professor['nome_professor']}")
                 
             selecionados = input("Digite os números dos professores separados por vírgula (deixe em branco para manter os atuais): ").strip().split(",")
             while not (all(eh_indice_valido(selecionado, len(professores)) for selecionado in selecionados) or selecionados == ['']):
